@@ -569,3 +569,117 @@ Date: Mon Aug 26 16:50:17 2024 +0200
   6 | +    - USERNAME: fg*****et
                        |_username_|
 ````
+
+
+YELP/Detect-Secrets
+````
+$ detect-secrets scan > .secrets.baseline
+$ detect-secrets audit .secrets.baseline
+````
+````
+Secret:      1 of 8
+Filename:    src\.env
+Secret Type: AWS Access Key
+----------
+1:AWS_KEY=AKIAIOSFODNN7EXAMPLE
+2:AWS_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (q)uit: s
+
+Secret:      2 of 8
+Filename:    src\.env
+Secret Type: Base64 High Entropy String
+----------
+1:AWS_KEY=AKIAIOSFODNN7EXAMPLE
+2:AWS_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (b)ack, (q)uit: s
+
+Secret:      3 of 8
+Filename:    src\.env
+Secret Type: Secret Keyword
+----------
+1:AWS_KEY=AKIAIOSFODNN7EXAMPLE
+2:AWS_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (b)ack, (q)uit: s
+
+Secret:      4 of 8
+Filename:    src\Client.java
+Secret Type: Secret Keyword
+----------
+5:import javax.net.ssl.*;
+6:
+7:public class Client {
+8:
+9:    private static final String KEYSTORE_LOCATION = "clientKeystore.jks";
+10:    private static final String KEYSTORE_PASSWORD = "client";
+11:    private static final String TRUSTSTORE_LOCATION = "clientTruststore.jks";
+12:    private static final String TRUSTSTORE_PASSWORD = "client";
+13:    private static final Logger LOGGER = Logger.getLogger(Client.class.getName());
+14:
+15:    public static void main(String[] args) {
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (b)ack, (q)uit: s
+
+Secret:      5 of 8
+Filename:    src\InsecurePasswordExample.java
+Secret Type: Secret Keyword
+----------
+3:import java.sql.SQLException;
+4:
+5:public class InsecurePasswordExample {
+6:    public static void main(String[] args) throws SQLException {
+7:        // Hardcoded plain text password (This is insecure!)
+8:        String password = "P@ssw0rd123";
+9:
+10:        // Simulating usage of the password (e.g., authentication)
+11:        System.out.println("Connecting to the database with password: " + password);
+12:
+13:        // Here you would typically use the password to connect to a database or another service
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (b)ack, (q)uit: s
+
+Secret:      6 of 8
+Filename:    src\Server.java
+Secret Type: Secret Keyword
+----------
+5:import javax.net.ssl.*;
+6:
+7:public class Server {
+8:
+9:    private static final String KEYSTORE_LOCATION = "serverKeystore.jks";
+10:    private static final String KEYSTORE_PASSWORD = "password";
+11:    private static final String TRUSTSTORE_LOCATION = "serverTruststore.jks";
+12:    private static final String TRUSTSTORE_PASSWORD = "password";
+13:    private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
+14:
+15:    public static void main(String[] args) {
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (b)ack, (q)uit: s
+
+Secret:      7 of 8
+Filename:    src\env.json
+Secret Type: Secret Keyword
+----------
+1:{
+2:  "AWS_KEY": "QOSLKFNFS01254",
+3:  "AWS_SECRET_KEY": "QOSLKFNFS01254/DSDSDSDDS/KEY",
+4:  "AWS_IAM": "arn:aws:iam::123456789012:user/Development/product_1234/*"
+5:}
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (b)ack, (q)uit: s
+
+Secret:      8 of 8
+Filename:    src\env.yml
+Secret Type: Secret Keyword
+----------
+1:%YAML 1.2
+2:---
+3:app:
+4:  secrets:
+5:    - PASSWORD: P@ssword
+6:    - USERNAME: fgenaudet
+----------
+Should this string be committed to the repository? (y)es, (n)o, (s)kip, (b)ack, (q)uit: s
+````
